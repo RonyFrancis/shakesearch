@@ -1,8 +1,6 @@
 package controller
 
 import (
-	"encoding/json"
-	"fmt"
 	"net/http"
 	"pulley.com/shakesearch/models"
 	"strings"
@@ -33,13 +31,7 @@ func HandleSearch(searcher models.Searcher) func(w http.ResponseWriter, r *http.
 			w.Write([]byte("couldn't find the requested play"))
 			return
 		}
-		// making the contents of the play more readable format
-		// by removing the "\r\n" and empty strings
-		buff, err := json.Marshal(searcher.Work.Plays[index].Content)
-		if err != nil {
-			fmt.Println(err.Error())
-		}
 		w.Header().Set("Content-Type", "application/json")
-		w.Write(buff)
+		w.Write(searcher.Work.Plays[index].Content)
 	}
 }

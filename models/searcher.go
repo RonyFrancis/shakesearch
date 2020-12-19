@@ -1,6 +1,7 @@
 package models
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"index/suffixarray"
@@ -19,6 +20,7 @@ type Searcher struct {
 	Work          Work
 	// Contents list of plays for faster access in searching
 	Contents      []string
+
 }
 
 // Work list of play from  William Shakespeare
@@ -29,7 +31,7 @@ type Work struct {
 // Play contains details related to the play like name and content(script)
 type Play struct {
 	Name    string `json:"name"`
-	Content []string `json:"content"`
+	Content []byte `json:"content"`
 }
 
 // Load the file into searcher struct
@@ -52,6 +54,7 @@ func (s * Searcher) LoadPlays() (work Work, err error) {
 	}
 	s.Contents = contents
 	var content string
+	var contentList []string
 	var play Play
 	for i, val := range contents {
 		play.Name = strings.TrimSpace(val)
@@ -60,7 +63,12 @@ func (s * Searcher) LoadPlays() (work Work, err error) {
 		} else {
 			content = s.loadPlay(strings.TrimSpace(val),"")
 		}
-		play.Content = s.DeleteEmpty(strings.Split(content, "\r\n"))
+		contentList = s.DeleteEmpty(strings.Split(content, "\r\n"))
+		buff, err := json.Marshal(contentList)
+		if err != nil {
+			fmt.Println(err.Error())
+		}
+		play.Content = buff
 		work.Plays = append(work.Plays, play)
 	}
 	return work, err
