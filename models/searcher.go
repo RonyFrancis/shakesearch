@@ -29,7 +29,7 @@ type Work struct {
 // Play contains details related to the play like name and content(script)
 type Play struct {
 	Name    string `json:"name"`
-	Content string `json:"content"`
+	Content []string `json:"content"`
 }
 
 // Load the file into searcher struct
@@ -51,14 +51,16 @@ func (s * Searcher) LoadPlays() (work Work, err error) {
 		return work, err
 	}
 	s.Contents = contents
+	var content string
+	var play Play
 	for i, val := range contents {
-		var play Play
 		play.Name = strings.TrimSpace(val)
 		if i < len(contents) - 1 {
-			play.Content = s.loadPlay(strings.TrimSpace(val), strings.TrimSpace(contents[i + 1]))
+			content = s.loadPlay(strings.TrimSpace(val), strings.TrimSpace(contents[i + 1]))
 		} else {
-			play.Content = s.loadPlay(strings.TrimSpace(val),"")
+			content = s.loadPlay(strings.TrimSpace(val),"")
 		}
+		play.Content = s.DeleteEmpty(strings.Split(content, "\r\n"))
 		work.Plays = append(work.Plays, play)
 	}
 	return work, err

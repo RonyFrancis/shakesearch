@@ -35,8 +35,7 @@ func HandleSearch(searcher models.Searcher) func(w http.ResponseWriter, r *http.
 		}
 		// making the contents of the play more readable format
 		// by removing the "\r\n" and empty strings
-		contents := strings.Split(searcher.Work.Plays[index].Content, "\r\n")
-		buff, err := json.Marshal(searcher.DeleteEmpty(contents))
+		buff, err := json.Marshal(searcher.Work.Plays[index].Content)
 		if err != nil {
 			fmt.Println(err.Error())
 		}
