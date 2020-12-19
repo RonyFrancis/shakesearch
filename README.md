@@ -1,27 +1,32 @@
 # ShakeSearch
 
-Welcome to the Pulley Shakesearch Take-home Challenge! In this repository,
-you'll find a simple web app that allows a user to search for a text string in
-the complete works of Shakespeare.
-
+ShakeSearch is a simple web application to display William Shakespeare plays based on the users search query.
 You can see a live version of the app at
-https://pulley-shakesearch.herokuapp.com/. Try searching for "Hamlet" to display
-a set of results.
+https://shakesearch-rony.herokuapp.com/. Try searching for "Hamlet" to display
+a set of results. 
 
-In it's current state, however, the app is just a rough prototype. The search is
-case sensitive, the results are difficult to read, and the search is limited to
-exact matches.
-
-## Your Mission
+## My Mission
 
 Improve the search backend. Think about the problem from the user's perspective
 and prioritize your changes according to what you think is most useful.
 
+## My Changes
+1. Changed the output to show the entire play based on query rather than sentences containing the query.
+2. Made the search query to be case-insensitive for better user experience
+3. Output is shown in a more structured manner
+
+## Future Changes
+### Frontend Changes
+1. Better frontend ui 
+2. Remove "," that is coming from the frontend
+3. Autocomplete for user
+
+### Backend Changes
+1. Average time for response is 1.5 sec. It can be deceased using caching
+2. Pagination to improve response Time
+3. Better test coverage
+4. Better code structuring
+
 ## Submission
-
-1. Fork this repository and send us a link to your fork after pushing your changes. 
-2. Heroku hosting - The project includes a Heroku Procfile and, in its
-current state, can be deployed easily on Heroku's free tier.
-3. In your submission, share with us what changes you made and how you would prioritize changes if you had more time.
-
+1. I forked this repo at about 11 am IST and finished it by 5. It took me about 6 hours to complete it.
 
